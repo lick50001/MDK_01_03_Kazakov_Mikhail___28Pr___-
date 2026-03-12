@@ -38,7 +38,7 @@ public class NotesActivity extends AppCompatActivity {
         etSearch = findViewById(R.id.et_search);
 
         btnAddNotes.setOnClickListener(v -> {
-            Intent intentActivityNote = new Intent(this, NotesActivity.class);
+            Intent intentActivityNote = new Intent(this, NoteActivity.class);
             startActivity(intentActivityNote);
         });
 
@@ -76,7 +76,7 @@ public class NotesActivity extends AppCompatActivity {
             int Position = i;
 
             item_notes.setOnClickListener(v -> {
-                Intent intentActivityNote = new Intent(this, NotesActivity.class);
+                Intent intentActivityNote = new Intent(this, NoteActivity.class);
                 intentActivityNote.putExtra("position", Position);
                 startActivity(intentActivityNote);
             });

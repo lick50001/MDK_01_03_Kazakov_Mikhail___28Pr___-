@@ -1,5 +1,6 @@
 package com.example.notes_klimov.presentations;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -22,21 +23,27 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class NoteActivity extends AppCompatActivity {
+    private static final String PREFS_FILE = "Note";
+    private static final String PREF_TITLE = "Title";
+    private static final String PREF_TEXT = "Text";
     Note note;
-
+    SharedPreferences settings;
     EditText etTitle, etText;
     TextView tvDate;
-    View btnSelectColor, btnBack, btnTrash;
+    View btnSelectColor, btnBack, btnTrash, btnSave, btnImport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_note);
+        settings = getSharedPreferences(PREFS_FILE, MODE_PRIVATE);
 
         Date DateNow = new Date();
         SimpleDateFormat FormatForDateNow = new SimpleDateFormat("HH:mm:ss dd:MM:yyyy");
 
+        btnSave = findViewById(R.id.btn_save_note);
+        btnImport = findViewById(R.id.btn_import_note);
         btnSelectColor = findViewById(R.id.btn_select_color);
         btnBack = findViewById(R.id.btn_back);
         btnTrash = findViewById(R.id.btn_trash);
@@ -86,9 +93,33 @@ public class NoteActivity extends AppCompatActivity {
         });
 
         btnTrash.setOnClickListener(v -> {
-            RepoNotes.Notes.add(note);
+            RepoNotes.Notes.remove(note);
             finish();
             Toast.makeText(this, "Заметка удалена", Toast.LENGTH_SHORT).show();
+        });
+
+        btnSave.setOnClickListener(v -> {
+            String title = etTitle.getText().toString();
+            String text = etText.getText().toString();
+            if (title.isEmpty()){
+                Toast.makeText(this, "Нет названия заметки", Toast.LENGTH_SHORT).show();
+            } else if (text.isEmpty()) {
+                Toast.makeText(this, "Нет текста заметки", Toast.LENGTH_SHORT).show();
+            } else {
+                SharedPreferences.Editor prefEditor = settings.edit();
+                prefEditor.putString(PREF_TITLE, title);
+                prefEditor.putString(PREF_TEXT, text);
+                prefEditor.apply();
+                Toast.makeText(this, "Сохранено", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnImport.setOnClickListener(v -> {
+            String title = settings.getString(PREF_TITLE, "");
+            String text = settings.getString(PREF_TEXT, "");
+            etTitle.setText(title);
+            etText.setText(text);
+            Toast.makeText(this, "Импортировано", Toast.LENGTH_SHORT).show();
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

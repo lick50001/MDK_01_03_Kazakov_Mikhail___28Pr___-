@@ -13,12 +13,9 @@
         android:theme="@style/Theme.Notes_Klimov">
         <activity
             android:name=".presentations.NoteActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".presentations.NotesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentations.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
