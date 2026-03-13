@@ -1,7 +1,10 @@
 package com.example.notes_klimov.presentations;
 
+import static com.example.notes_klimov.presentations.NotesActivity.itemsParent;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,7 +33,11 @@ public class NoteActivity extends AppCompatActivity {
     SharedPreferences settings;
     EditText etTitle, etText;
     TextView tvDate;
-    View btnSelectColor, btnBack, btnTrash, btnSave, btnImport;
+    View btnSelectColor, btnBack, btnTrash, btnSave, btnImport, MainColor;
+
+    public View butSelColor;
+
+    public int index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +45,10 @@ public class NoteActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_note);
         settings = getSharedPreferences(PREFS_FILE, MODE_PRIVATE);
+
+        butSelColor = findViewById(R.id.btn_select_color);
+//        linearLayout = findViewById(R.layout.activity_notes);
+
 
         Date DateNow = new Date();
         SimpleDateFormat FormatForDateNow = new SimpleDateFormat("HH:mm:ss dd:MM:yyyy");
@@ -50,6 +61,7 @@ public class NoteActivity extends AppCompatActivity {
         etTitle = findViewById(R.id.et_title);
         etText = findViewById(R.id.et_text);
         tvDate = findViewById(R.id.tv_date);
+        MainColor = findViewById(R.id.main);
 
         Bundle arguments = getIntent().getExtras();
         if (arguments != null){
@@ -59,6 +71,8 @@ public class NoteActivity extends AppCompatActivity {
 
             etTitle.setText(note.title);
             etText.setText(note.text);
+            MainColor.setBackgroundColor(note.CurrentColor(true, note.color));
+            btnSelectColor.setBackgroundColor(note.CurrentColor(false, note.color));
         } else{
             btnTrash.setVisibility(View.GONE);
         }
@@ -66,7 +80,11 @@ public class NoteActivity extends AppCompatActivity {
         tvDate.setText("Отредактировано: " + FormatForDateNow.format(DateNow));
 
         btnSelectColor.setOnClickListener(v -> {
-            Toast.makeText(this,"Выбор цвета недоступен", Toast.LENGTH_SHORT).show();
+            int Position = arguments.getInt("position");
+
+            note = RepoNotes.Notes.get(Position);
+
+            note.color = note.CurrentColor(true, note.color);
         });
 
         btnBack.setOnClickListener(v -> {

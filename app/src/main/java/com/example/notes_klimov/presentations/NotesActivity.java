@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class NotesActivity extends AppCompatActivity {
-    GridLayout itemsParent;
+    public static GridLayout itemsParent;
     View btnAddNotes;
     EditText etSearch;
 
@@ -62,16 +63,21 @@ public class NotesActivity extends AppCompatActivity {
     public void LoadNotes(ArrayList<Note> notes){
         itemsParent.removeAllViews();
 
-        for (int i = 0; i < notes.size(); i++){
+        for (int i = 0; i < notes.size(); i++) {
+            Note newNote = notes.get(i);
             View item_notes = LayoutInflater.from(this).inflate(R.layout.item_note, itemsParent, false);
 
             TextView tvTitle = item_notes.findViewById(R.id.tv_title);
             TextView tvText = item_notes.findViewById(R.id.tv_text);
             TextView tvDate = item_notes.findViewById(R.id.tv_date);
+            LinearLayout linLay = item_notes.findViewById(R.id.linearLayoutItem);
 
             tvTitle.setText(notes.get(i).title);
             tvText.setText(notes.get(i).text);
             tvDate.setText(notes.get(i).date);
+            newNote.ChangeColor(newNote.color, linLay);
+
+
 
             int Position = i;
 
