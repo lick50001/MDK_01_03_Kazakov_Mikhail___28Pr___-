@@ -64,7 +64,6 @@ public class NotesActivity extends AppCompatActivity {
         itemsParent.removeAllViews();
 
         for (int i = 0; i < notes.size(); i++) {
-            Note newNote = notes.get(i);
             View item_notes = LayoutInflater.from(this).inflate(R.layout.item_note, itemsParent, false);
 
             TextView tvTitle = item_notes.findViewById(R.id.tv_title);
@@ -75,9 +74,7 @@ public class NotesActivity extends AppCompatActivity {
             tvTitle.setText(notes.get(i).title);
             tvText.setText(notes.get(i).text);
             tvDate.setText(notes.get(i).date);
-            newNote.ChangeColor(newNote.color, linLay);
-
-
+            linLay.setBackgroundColor(notes.get(i).color);
 
             int Position = i;
 

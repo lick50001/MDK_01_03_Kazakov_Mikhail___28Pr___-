@@ -14,31 +14,34 @@ public class Note {
     public int color;
 
     public static int[] colorChange = {
-            0x2071F9,
-            0x6bf2c1,
-            0xd7f26b,
-            0xf79525,
-            0xf72525,
-            0x25d1f7
+            0xFF2071F9,
+            0xFF6BF2C1,
+            0xFFD7F26B,
+            0xFFF79525,
+            0xFFF72525,
+            0xFF25D1F7
     };
 
-    public void ChangeColor(int Color, LinearLayout linearLayout){
+    public static void ChangeColor(int Color, LinearLayout linearLayout){
         linearLayout.setBackgroundColor(Color);
     }
 
 
-    public int CurrentColor(boolean ifNow, int id){
-        for (int i = 0; i < colorChange.length; i++)
-            if (colorChange[i] == id){
-                id = i;
+    public int CurrentColor(boolean ifNow, int currentColor){
+        int index = -1;
+        for (int i = 0; i < colorChange.length; i++) {
+            if (colorChange[i] == currentColor) {
+                index = i;
                 break;
             }
+        }
 
-        if(ifNow)
-            return colorChange[id];
-        else if(id == colorChange.length)
-            return colorChange[0];
-        else
-            return colorChange[id + 1];
+        if (index == -1) index = 0;
+
+        if (ifNow) {
+            return colorChange[index];
+        } else {
+            return colorChange[(index + 1) % colorChange.length];
+        }
     }
 }

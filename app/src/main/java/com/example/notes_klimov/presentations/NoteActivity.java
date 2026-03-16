@@ -1,5 +1,6 @@
 package com.example.notes_klimov.presentations;
 
+import static com.example.notes_klimov.domains.models.Note.colorChange;
 import static com.example.notes_klimov.presentations.NotesActivity.itemsParent;
 
 import android.content.SharedPreferences;
@@ -46,9 +47,6 @@ public class NoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_note);
         settings = getSharedPreferences(PREFS_FILE, MODE_PRIVATE);
 
-        butSelColor = findViewById(R.id.btn_select_color);
-//        linearLayout = findViewById(R.layout.activity_notes);
-
 
         Date DateNow = new Date();
         SimpleDateFormat FormatForDateNow = new SimpleDateFormat("HH:mm:ss dd:MM:yyyy");
@@ -80,11 +78,21 @@ public class NoteActivity extends AppCompatActivity {
         tvDate.setText("Отредактировано: " + FormatForDateNow.format(DateNow));
 
         btnSelectColor.setOnClickListener(v -> {
-            int Position = arguments.getInt("position");
+            if (arguments != null && note == null) {
+                int Position = arguments.getInt("position");
+                note = RepoNotes.Notes.get(Position);
+            }
+            if (note == null) {
+                note = new Note();
+                note.color = Note.colorChange[0];
+                RepoNotes.Notes.add(note);
+            }
 
-            note = RepoNotes.Notes.get(Position);
+            note.color = note.CurrentColor(false, note.color);
 
-            note.color = note.CurrentColor(true, note.color);
+            int displayColor = note.CurrentColor(true, note.color);
+            btnSelectColor.setBackgroundColor(displayColor);
+            MainColor.setBackgroundColor(displayColor);
         });
 
         btnBack.setOnClickListener(v -> {
