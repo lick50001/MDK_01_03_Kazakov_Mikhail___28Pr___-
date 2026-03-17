@@ -70,7 +70,6 @@ public class NoteActivity extends AppCompatActivity {
             etTitle.setText(note.title);
             etText.setText(note.text);
             MainColor.setBackgroundColor(note.CurrentColor(true, note.color));
-            btnSelectColor.setBackgroundColor(note.CurrentColor(false, note.color));
         } else{
             btnTrash.setVisibility(View.GONE);
         }

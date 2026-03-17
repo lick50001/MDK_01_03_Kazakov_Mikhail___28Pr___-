@@ -23,23 +23,23 @@
         android:id="@+id/btn_trash"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
         android:padding="3dp"
         android:src="@drawable/ic_trash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
+    <ImageView
         android:id="@+id/btn_select_color"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginTop="15dp"
         android:layout_marginRight="15dp"
-        android:backgroundTint="#2071F9"
-        app:cardCornerRadius="15dp"
+        android:padding="3dp"
+        android:src="@drawable/ic_color"
         app:layout_constraintEnd_toStartOf="@+id/btn_trash"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/et_title"
