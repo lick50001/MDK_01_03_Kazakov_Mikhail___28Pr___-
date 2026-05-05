@@ -12,6 +12,7 @@ public class Note {
     public String date;
 
     public int color;
+    public boolean isFavorite;
 
     public static int[] colorChange = {
             0xFF2071F9,

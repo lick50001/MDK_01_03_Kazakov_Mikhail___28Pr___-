@@ -26,12 +26,39 @@ public class NotesContext {
             note.text = cursor.getString(2);
             note.date = cursor.getString(3);
             note.color = cursor.getInt(4);
+            note.isFavorite = cursor.getInt(5) == 1;
 
             allNotes.add(note);
         } while (cursor.moveToNext());
 
         cursor.close();
         return allNotes;
+    }
+
+    public static ArrayList<Note> FavoriteNotes() {
+        ArrayList<Note> favoriteNotes = new ArrayList<>();
+        Cursor cursor = DbContext.sqLiteDatabase.query("Notes",
+                null, "isFavorite = 1", null,
+                null, null, null);
+
+        if (cursor.moveToFirst() == false) {
+            return favoriteNotes;
+        }
+        do {
+            Note note = new Note();
+
+            note.id = cursor.getInt(0);
+            note.title = cursor.getString(1);
+            note.text = cursor.getString(2);
+            note.date = cursor.getString(3);
+            note.color = cursor.getInt(4);
+            note.isFavorite = true;
+
+            favoriteNotes.add(note);
+        } while (cursor.moveToNext());
+
+        cursor.close();
+        return favoriteNotes;
     }
 
     public static void Save(Note note, boolean update) {
@@ -41,6 +68,7 @@ public class NotesContext {
         CV.put("Text", note.text);
         CV.put("Date", note.date);
         CV.put("Color", note.color);
+        CV.put("IsFavorite", note.isFavorite ? 1 : 0);
 
         if (update == false) {
             DbContext.sqLiteDatabase.insert(

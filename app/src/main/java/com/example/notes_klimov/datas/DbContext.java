@@ -8,7 +8,7 @@ public class DbContext extends SQLiteOpenHelper {
     public static SQLiteDatabase sqLiteDatabase;
 
     public DbContext(Context context) {
-        super(context, "DbNotes", null, 1);
+        super(context, "DbNotes", null, 2);
         sqLiteDatabase = this.getWritableDatabase();
     }
 
@@ -19,11 +19,13 @@ public class DbContext extends SQLiteOpenHelper {
                 "Title text," +
                 "Text text," +
                 "Date text," +
-                "Color integer)");
+                "Color integer," +
+                "IsFavorite integer)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        if (oldVersion < 2)
+            db.execSQL("ALTER TABLE Notes ADD COLUMN IsFavorite integer");
     }
 }

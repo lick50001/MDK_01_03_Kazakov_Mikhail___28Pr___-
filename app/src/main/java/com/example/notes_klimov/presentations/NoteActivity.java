@@ -36,7 +36,7 @@ public class NoteActivity extends AppCompatActivity {
     SharedPreferences settings;
     EditText etTitle, etText;
     TextView tvDate;
-    View btnSelectColor, btnBack, btnTrash, btnSave, btnImport, MainColor;
+    View btnSelectColor, btnBack, btnTrash, btnSave, btnImport, MainColor, btnFavorite;
 
     public View butSelColor;
 
@@ -62,6 +62,7 @@ public class NoteActivity extends AppCompatActivity {
         etText = findViewById(R.id.et_text);
         tvDate = findViewById(R.id.tv_date);
         MainColor = findViewById(R.id.main);
+        btnFavorite = findViewById(R.id.btn_favorite_note);
 
         Bundle arguments = getIntent().getExtras();
         if (arguments != null){
@@ -78,6 +79,14 @@ public class NoteActivity extends AppCompatActivity {
         }
 
         tvDate.setText("Отредактировано: " + FormatForDateNow.format(DateNow));
+
+        btnFavorite.setOnClickListener(v -> {
+            if (note != null) {
+                note.isFavorite = !note.isFavorite;
+                String messge = note.isFavorite ? "Добавлено в избранное" : "Удалено из избранного";
+                Toast.makeText(this, messge, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         btnSelectColor.setOnClickListener(v -> {
             if (arguments != null && note == null) {

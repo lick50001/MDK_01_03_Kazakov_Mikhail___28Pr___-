@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +28,7 @@ import java.util.stream.Collectors;
 
 public class NotesActivity extends AppCompatActivity {
     public static GridLayout itemsParent;
-    View btnAddNotes;
+    View btnAddNotes, btnFavoriteNotes, btnAllNotes;
     EditText etSearch;
     DbContext dbContext;
 
@@ -40,10 +41,28 @@ public class NotesActivity extends AppCompatActivity {
         btnAddNotes = findViewById(R.id.btn_add_notes);
         itemsParent = findViewById(R.id.gl_notes);
         etSearch = findViewById(R.id.et_search);
+        btnFavoriteNotes = findViewById(R.id.btn_feature_notes);
+        btnAllNotes = findViewById(R.id.btn_all_notes);
 
         btnAddNotes.setOnClickListener(v -> {
             Intent intentActivityNote = new Intent(this, NoteActivity.class);
             startActivity(intentActivityNote);
+        });
+
+        btnFavoriteNotes.setOnClickListener(v -> {
+            ArrayList<Note> favoriteNotes = NotesContext.FavoriteNotes();
+            LoadNotes(favoriteNotes);
+            if (favoriteNotes.isEmpty()) {
+                Toast.makeText(this, "Нет избранных заметок", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnAllNotes.setOnClickListener(v -> {
+            ArrayList<Note> allNotes = NotesContext.AllNotes();
+            LoadNotes(allNotes);
+            if (allNotes.isEmpty()) {
+                Toast.makeText(this, "Нет заметок", Toast.LENGTH_SHORT).show();
+            }
         });
 
         etSearch.setOnKeyListener(SearchListner);
