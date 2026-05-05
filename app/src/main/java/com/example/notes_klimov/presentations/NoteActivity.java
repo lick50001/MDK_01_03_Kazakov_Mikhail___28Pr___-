@@ -18,12 +18,14 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.notes_klimov.R;
+import com.example.notes_klimov.datas.NotesContext;
 import com.example.notes_klimov.datas.RepoNotes;
 import com.example.notes_klimov.domains.models.Note;
 
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class NoteActivity extends AppCompatActivity {
@@ -65,12 +67,13 @@ public class NoteActivity extends AppCompatActivity {
         if (arguments != null){
             int Position = arguments.getInt("position");
 
-            note = RepoNotes.Notes.get(Position);
+            ArrayList<Note> allNotes = NotesContext.AllNotes();
+            note = allNotes.get(Position);
 
             etTitle.setText(note.title);
             etText.setText(note.text);
             MainColor.setBackgroundColor(note.CurrentColor(true, note.color));
-        } else{
+        } else {
             btnTrash.setVisibility(View.GONE);
         }
 
@@ -84,7 +87,6 @@ public class NoteActivity extends AppCompatActivity {
             if (note == null) {
                 note = new Note();
                 note.color = Note.colorChange[0];
-                RepoNotes.Notes.add(note);
             }
 
             note.color = note.CurrentColor(false, note.color);
@@ -107,18 +109,20 @@ public class NoteActivity extends AppCompatActivity {
             } else{
                 if (note == null){
                     note = new Note();
-                    RepoNotes.Notes.add(note);
                 }
 
                 note.title = Title;
                 note.text = Text;
                 note.date = FormatForDateNow.format(DateNow);
+
+                boolean isUpdate = note.id != 0;
+                NotesContext.Save(note, isUpdate);
             }
             finish();
         });
 
         btnTrash.setOnClickListener(v -> {
-            RepoNotes.Notes.remove(note);
+            NotesContext.Delete(note);
             finish();
             Toast.makeText(this, "Заметка удалена", Toast.LENGTH_SHORT).show();
         });

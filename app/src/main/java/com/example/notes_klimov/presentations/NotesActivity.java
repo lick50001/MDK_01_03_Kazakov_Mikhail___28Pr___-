@@ -51,8 +51,6 @@ public class NotesActivity extends AppCompatActivity {
         dbContext = new DbContext(this);
         LoadNotes(NotesContext.AllNotes());
 
-        LoadNotes(RepoNotes.Notes);
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

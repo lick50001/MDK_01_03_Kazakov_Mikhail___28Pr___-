@@ -19,7 +19,7 @@ public class DbContext extends SQLiteOpenHelper {
                 "Title text," +
                 "Text text," +
                 "Date text," +
-                "Color text)");
+                "Color integer)");
     }
 
     @Override
