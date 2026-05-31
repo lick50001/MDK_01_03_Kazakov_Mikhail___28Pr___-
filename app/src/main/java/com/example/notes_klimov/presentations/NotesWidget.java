@@ -58,6 +58,7 @@ public class NotesWidget extends AppWidgetProvider {
             int currentIndex = getCurrentIndex(context, appWidgetId);
             Note note = notes.get(currentIndex);
             views.setTextViewText(R.id.tv, note.text);
+            views.setInt(R.id.tv, "setBackgroundColor", note.color);
         }
         Intent intent = new Intent(context, NotesWidget.class);
         intent.setAction(ACTION);
