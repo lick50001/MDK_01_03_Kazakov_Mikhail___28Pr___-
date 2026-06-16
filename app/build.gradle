@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.notes_klimov'
+    namespace 'com.example.notes_kazakov'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.notes_klimov"
+        applicationId "com.example.notes_kazakov"
         minSdk 28
         targetSdk 36
         versionCode 1

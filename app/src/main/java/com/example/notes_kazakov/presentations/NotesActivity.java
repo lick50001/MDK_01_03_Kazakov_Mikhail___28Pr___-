@@ -1,4 +1,4 @@
-package com.example.notes_klimov.presentations;
+package com.example.notes_kazakov.presentations;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,11 +17,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.notes_klimov.R;
-import com.example.notes_klimov.datas.DbContext;
-import com.example.notes_klimov.datas.NotesContext;
-import com.example.notes_klimov.datas.RepoNotes;
-import com.example.notes_klimov.domains.models.Note;
+import com.example.notes_kazakov.R;
+import com.example.notes_kazakov.datas.DbContext;
+import com.example.notes_kazakov.datas.NotesContext;
+import com.example.notes_kazakov.datas.RepoNotes;
+import com.example.notes_kazakov.domains.models.Note;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;

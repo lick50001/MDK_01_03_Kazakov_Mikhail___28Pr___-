@@ -1,9 +1,9 @@
-package com.example.notes_klimov.datas;
+package com.example.notes_kazakov.datas;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import com.example.notes_klimov.domains.models.Note;
+import com.example.notes_kazakov.domains.models.Note;
 
 import java.util.ArrayList;
 

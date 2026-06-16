@@ -1,5 +1,5 @@
-package com.example.notes_klimov.datas;
-import com.example.notes_klimov.domains.models.Note;
+package com.example.notes_kazakov.datas;
+import com.example.notes_kazakov.domains.models.Note;
 import java.util.ArrayList;
 
 public class RepoNotes {

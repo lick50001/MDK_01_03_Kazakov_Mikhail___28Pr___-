@@ -1,7 +1,7 @@
-package com.example.notes_klimov.presentations;
+package com.example.notes_kazakov.presentations;
 
-import static com.example.notes_klimov.domains.models.Note.colorChange;
-import static com.example.notes_klimov.presentations.NotesActivity.itemsParent;
+import static com.example.notes_kazakov.domains.models.Note.colorChange;
+import static com.example.notes_kazakov.presentations.NotesActivity.itemsParent;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,10 +17,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.notes_klimov.R;
-import com.example.notes_klimov.datas.NotesContext;
-import com.example.notes_klimov.datas.RepoNotes;
-import com.example.notes_klimov.domains.models.Note;
+import com.example.notes_kazakov.R;
+import com.example.notes_kazakov.datas.NotesContext;
+import com.example.notes_kazakov.datas.RepoNotes;
+import com.example.notes_kazakov.domains.models.Note;
 
 import org.w3c.dom.Text;
 

@@ -1,4 +1,4 @@
-package com.example.notes_klimov.presentations;
+package com.example.notes_kazakov.presentations;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -7,14 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
-import com.example.notes_klimov.R;
-import com.example.notes_klimov.datas.NotesContext;
-import com.example.notes_klimov.domains.models.Note;
+import com.example.notes_kazakov.R;
+import com.example.notes_kazakov.datas.NotesContext;
+import com.example.notes_kazakov.domains.models.Note;
 
 import java.util.ArrayList;
 
 public class NotesWidget extends AppWidgetProvider {
-    String ACTION = "com.example.notes_klimov.NEXT_NOTE";
+    String ACTION = "com.example.notes_kazakov.NEXT_NOTE";
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
